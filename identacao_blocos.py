@@ -11,7 +11,7 @@ def sacar(valor):  # Abertura de bloco do método sacar
 def depositar(valor):   # Abertura de bloco do método depositar
     saldo = 500
     saldo += valor
-                            # Fechamento de bloco
+                        # Fechamento de bloco
 
 
 sacar(600)
