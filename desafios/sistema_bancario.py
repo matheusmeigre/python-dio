@@ -17,6 +17,7 @@ nome_usuario = None
 nome = input("Por favor, digite seu nome: ")
 nome_usuario = nome
 print("Bem vindo, {}!".format(nome_usuario))
+print(f"O seu limite de saque diário é de R${limite}")
 
 while True:
         
