@@ -1,0 +1,6 @@
+Iterar Listas
+ - A forma mais comum para percorrer os dados de uma lista é utilizando o comando <for>
+
+ Função enumerate:
+ - As vezes é necessário saber qual o índice do objeto dentro do laço <for>. Para isso podemos
+ usar a função enumerate (exemplo em iterar_listas.py)
