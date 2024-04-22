@@ -1,5 +1,5 @@
 """
- Criando Dicionários
+ ----------------Criando Dicionários----------------
   Um dicionário é um conjunto NÃO-ORDENADO de pares chave:valor, onde as CHAVES são
   ÚNICAS em uma data instância do dicionário. Dicionários são delimitados por chaves: {},
   e contém uma lista de pares chave:valor separada por vírgulas.
@@ -28,7 +28,7 @@ dados["celular"] = "2222-3333"
 dados # {"nome": "Lais", "idade": 20, "celular": "2222-3333"}
 
 """
-Dicionários aninhados
+----------------Dicionários aninhados----------------
  Eles podem armazenar qualquer tipo de objeto Python como valor, desde que a chave para
  esse valor seja um objeto imutável como (strings e números).
 """
@@ -43,3 +43,11 @@ celular = contato["matheus@gmail.com"]["celular"] # "3333-4444"
 
 profissao_atual = contato["marcos@gmail.com"]["profissao"]["atual"]
 print(profissao_atual)
+
+# ---------------- Iterar Dicionários ----------------
+for chave in contato:
+    print(chave, contato[chave])
+
+
+for chave, valor in contato.items():   # Melhor legibilidade
+    print(chave, valor)
