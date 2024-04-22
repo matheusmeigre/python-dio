@@ -28,18 +28,16 @@ nomes = ("Matheus", "Marcos", "Julio", "Roberta", "Venicio",)
 
 print("\nIndex method class down")
 
-primeiro_resultado = nomes.index("Matheus")
-print(f"Resultado: {primeiro_resultado}")
+print(nomes.index("Matheus"))
+print(nomes.index("Marcos"))
+print(nomes.index("Julio"))
+print(nomes.index("Roberta"))
+print(nomes.index("Venicio"))
 
-segundo_resultado = nomes.index("Marcos")
-print(f"Resultado: {segundo_resultado}")
 
-terceiro_resultado = nomes.index("Julio")
-print(f"Resultado: {terceiro_resultado}")
+# .len()
+print("\nLen method class down")
 
-quarto_resultado = nomes.index("Roberta")
-print(f"Resultado: {quarto_resultado}")
-
-quinto_resultado = nomes.index("Venicio")
-print(f"Resultado: {quinto_resultado}")
+familia = ("Matheus", "Marcos", "Julio", "Roberta", "Venicio",)
+print(len(familia))
 
