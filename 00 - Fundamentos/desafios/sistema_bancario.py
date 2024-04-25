@@ -54,7 +54,7 @@ def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
 
 
 def exibir_extrato(saldo, /, *, extrato):
-    print(f"\n========== EXTRATO DE {nome_usuario.upper()} ==========")
+    print(f"\n========== EXTRATO ==========")
     print("Não foram realizadas movimentações." if not extrato else extrato)
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("========================================")
@@ -102,6 +102,7 @@ def listar_contas(contas):
         """
         print("=" * 100)
         print(textwrap.dedent(linha))
+
 
 def main():
     LIMITE_SAQUES = 3
