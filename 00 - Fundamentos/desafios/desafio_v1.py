@@ -1,5 +1,4 @@
-from abc import ABC, abstractclassmethod,
-abstractproperty
+from abc import ABC, abstractclassmethod,abstractproperty
 from datetime import datetime
 
 class Cliente:
@@ -8,7 +7,7 @@ class Cliente:
         self.contas = []
 
     def realizar_transacao(self, conta, transacao):
-    transacao.registrar(conta)
+        transacao.registrar(conta)
     
     def adicionar_conta(self, conta):
         self.contas.append(conta)
@@ -160,3 +159,15 @@ class Saque(Transacao):
 
 
 class Deposito(Transacao):
+    def __init__(self, valor):
+        self._valor = valor
+
+        @property
+        def valor(self):
+            return self._valor
+    
+        def registrar(self, conta):
+            sucesso_transacao = conta.depositar(self.valor)
+
+            if sucesso_transacao:
+                conta.historico.adicionar_transacao(self)
