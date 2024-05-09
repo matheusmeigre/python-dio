@@ -2,7 +2,6 @@ import textwrap
 from abc import ABC, abstractclassmethod,abstractproperty
 from datetime import datetime
 
-
 class Cliente:
     def __init__(self, endereco):
         self.endereco = endereco
@@ -25,7 +24,7 @@ class PessoaFisica(Cliente):
 
 class Conta:
     def __init__(self, numero, cliente):
-        self.saldo = 0
+        self._saldo = 0
         self._numero = numero
         self._agencia = "0001"
         self._cliente = cliente
@@ -37,7 +36,7 @@ class Conta:
     
     @property
     def saldo(self):
-        return self.saldo
+        return self._saldo
     
     @property
     def numero(self):
@@ -129,7 +128,7 @@ class Historico:
                 {
                     "tipo": transacao.__class__.__name__,
                     "valor": transacao.valor,
-                    "data": datetime.now().strftime("%d-%m-%Y %H:%M:%s"),
+                    "data": datetime.now().strftime("%d-%m-%Y %H:%M"),
                 }
             )
 
@@ -164,15 +163,15 @@ class Deposito(Transacao):
     def __init__(self, valor):
         self._valor = valor
 
-        @property
-        def valor(self):
-            return self._valor
+    @property
+    def valor(self):
+        return self._valor
     
-        def registrar(self, conta):
-            sucesso_transacao = conta.depositar(self.valor)
+    def registrar(self, conta):
+        sucesso_transacao = conta.depositar(self.valor)
 
-            if sucesso_transacao:
-                conta.historico.adicionar_transacao(self)
+        if sucesso_transacao:
+            conta.historico.adicionar_transacao(self)
 
 
 def menu():
@@ -301,4 +300,42 @@ def criar_conta(numero_conta, clientes, contas):
 
 
 def listar_contas(contas):
-    
+    for conta in contas:
+        print("=" * 100)
+        print(textwrap.dedent(str(conta)))
+
+
+def main():
+    clientes = []
+    contas = []
+
+    while True:
+        opcao = menu()
+
+        if opcao == "d":
+            depositar(clientes)
+
+        elif opcao == "s":
+            sacar(clientes)
+
+        elif opcao == "e":
+            exibir_extrato(clientes)
+
+        elif opcao == "nu":
+            criar_cliente(clientes)
+
+        elif opcao == "nc":
+            numero_conta = len(contas) + 1
+            criar_conta(numero_conta, clientes, contas)
+
+        elif opcao == "lc":
+            listar_contas(contas)
+
+        elif opcao == "q":
+            break
+
+        else:
+            print("\n@@@ Operação inválida, por favor selecione novamente a operação desejada. @@@")
+
+
+main()
