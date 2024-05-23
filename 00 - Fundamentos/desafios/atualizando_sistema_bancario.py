@@ -132,6 +132,10 @@ class Historico:
                 }
             )
 
+        def gerar_relatorio(self, tipo_transacao=None):
+            for transacao in self._transacoes:
+                if tipo_transacao is None or transacao["tipo"].lower() == tipo_transacao.lower():
+                    yield transacao
 
 class Transacao(ABC):
     @property
@@ -173,6 +177,13 @@ class Deposito(Transacao):
         if sucesso_transacao:
             conta.historico.adicionar_transacao(self)
 
+def log_transacao(func):
+    def envelope(*args, **kwargs):
+        resultado = func(*args, **kwargs)
+        print(f"{datetime.now()}: {func.__name__.upper()}")
+        return resultado
+    
+    return envelope
 
 def menu():
     menu = """\n
@@ -201,7 +212,7 @@ def recuperar_conta_cliente(cliente):
     #FIXME: não permite escolher a conta
     return cliente.contas[0]
 
-
+@log_transacao
 def depositar(clientes):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_cliente(cpf, clientes)
@@ -219,7 +230,7 @@ def depositar(clientes):
     
     cliente.realizar_transacao(conta, transacao)
 
-
+@log_transacao
 def sacar(clientes):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_cliente(cpf, clientes)
@@ -237,7 +248,7 @@ def sacar(clientes):
     
     cliente.realizar_transacao(conta, transacao)
 
-
+@log_transacao
 def exibir_extrato(clientes):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_cliente(cpf, clientes)
@@ -251,20 +262,20 @@ def exibir_extrato(clientes):
         return
     
     print("\n========== EXTRATO ==========")
-    transacoes = conta.historico.transacoes
-
     extrato = ""
-    if not transacoes:
+    tem_transacao = False
+    for transacao in conta.historico.gerar_relatorio():
+        tem_transacao = True
+        extrato += f"\n{transacao['tipo']}:\n\tR$ {transacao['valor']:.2f}"
+
+    if not tem_transacao:
         extrato = "Não foram realizadas movimentações."
-    else:
-        for transacao in transacoes:
-            extrato += f"\n{transacao['tipo']}:\n\tR${transacao['valor']:.2f}"
 
     print(extrato)
     print(f"\nSaldo:\n\tR$ {conta.saldo:.2f}")
     print("========================================")
 
-
+@log_transacao
 def criar_cliente(clientes):
         cpf = input("Informe o CPF (somente número): ")
         cliente = filtrar_cliente(cpf, clientes)
@@ -283,7 +294,7 @@ def criar_cliente(clientes):
 
         print("\n=== Cliente criado com sucesso! ===")
 
-
+@log_transacao
 def criar_conta(numero_conta, clientes, contas):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_cliente(cpf, clientes)
