@@ -161,6 +161,7 @@ class Historico:
                 if tipo_transacao is None or transacao["tipo"].lower() == tipo_transacao.lower():
                     yield transacao
 
+
 class Transacao(ABC):
     @property
     @abstractproperty
@@ -201,6 +202,7 @@ class Deposito(Transacao):
         if sucesso_transacao:
             conta.historico.adicionar_transacao(self)
 
+
 def log_transacao(func):
     def envelope(*args, **kwargs):
         resultado = func(*args, **kwargs)
@@ -208,6 +210,7 @@ def log_transacao(func):
         return resultado
     
     return envelope
+
 
 def menu():
     menu = """\n
