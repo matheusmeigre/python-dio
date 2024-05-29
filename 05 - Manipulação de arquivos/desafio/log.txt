@@ -1,0 +1,6 @@
+[2024-05-29 12:00:31] Função 'criar_cliente' executada com argumentos ([<PessoaFisica: ('1')>],) e {}. Retornou None
+[2024-05-29 12:43:19] Funcao 'criar_cliente' executada com argumentos ([<PessoaFisica: ('1')>],) e {}. Retornou None
+[2024-05-29 12:43:22] Funcao 'criar_conta' executada com argumentos (1, [<PessoaFisica: ('1')>], [<ContaCorrente: ('0001', '1', 'Matheus Meigre')>]) e {}. Retornou None
+[2024-05-29 12:43:27] Funcao 'depositar' executada com argumentos ([<PessoaFisica: ('1')>],) e {}. Retornou None
+[2024-05-29 12:48:01] Funcao 'criar_cliente' executada com argumentos ([<PessoaFisica: ('Alistair',1')>],) e {}. Retornou None
+[2024-05-29 12:48:04] Funcao 'criar_conta' executada com argumentos (1, [<PessoaFisica: ('Alistair',1')>], [<ContaCorrente: ('0001', '1', 'Alistair')>]) e {}. Retornou None
